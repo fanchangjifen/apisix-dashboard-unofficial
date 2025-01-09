@@ -5,10 +5,10 @@
         <div class="left-operation-container">
           <t-button @click="handleCreate"> {{ t('pages.apisixService.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.apisixService.export') }}</t-button
+            {{ t('pages.apisixService.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.apisixService.selectedCount', { num: selectedRowKeys.length }) }}
+            {{ t('pages.apisixService.selectedCount', { num: selectedRowKeys.length }) }}
           </p>
         </div>
         <div class="search-input">
@@ -57,10 +57,10 @@
         <!-- eslint-disable-next-line vue/valid-v-slot -->
         <template #value.enable_websocket="{ row }">
           <t-tag v-if="row.value.enable_websocket === 0" theme="danger" variant="light-outline">
-            {{ $t('pages.apisixRoute.value.enable_websocketEnum.0') }}
+            {{ t('pages.apisixRoute.value.enable_websocketEnum.0') }}
           </t-tag>
           <t-tag v-if="row.value.enable_websocket === 1" theme="success" variant="light-outline">
-            {{ $t('pages.apisixRoute.value.enable_websocketEnum.1') }}
+            {{ t('pages.apisixRoute.value.enable_websocketEnum.1') }}
           </t-tag>
         </template>
 
@@ -86,13 +86,13 @@
         <template #op="slotProps: BaseTableCellParams<Item>">
           <t-space>
             <t-link theme="primary" @click="handleClickView(slotProps)">
-              {{ $t('pages.apisixService.operations.view') }}</t-link
+              {{ t('pages.apisixService.operations.view') }}</t-link
             >
             <t-link theme="primary" @click="handleClickEdit(slotProps)">
-              {{ $t('pages.apisixService.operations.edit') }}</t-link
+              {{ t('pages.apisixService.operations.edit') }}</t-link
             >
             <t-link theme="danger" @click="handleClickDelete(slotProps)">
-              {{ $t('pages.apisixService.operations.delete') }}</t-link
+              {{ t('pages.apisixService.operations.delete') }}</t-link
             >
           </t-space>
         </template>
@@ -107,14 +107,14 @@
     >
       <p v-if="deleteIdx.length === 1">
         {{
-          $t('pages.apisixService.deleteConfirm.deleteOne', {
+          t('pages.apisixService.deleteConfirm.deleteOne', {
             name: data[deleteIdx[0]]?.value?.id,
           })
         }}
       </p>
       <p v-if="deleteIdx.length > 1">
         {{
-          $t('pages.apisixService.deleteConfirm.deleteMulti', {
+          t('pages.apisixService.deleteConfirm.deleteMulti', {
             name: data[deleteIdx[0]]?.value?.id,
             num: deleteIdx.length,
           })

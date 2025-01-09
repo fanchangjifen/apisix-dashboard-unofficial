@@ -45,35 +45,35 @@
           :rules="UPSTREAM_NODES_RULE"
           class="nodesForm"
         >
-          <t-form-item :label="$t('components.apisixUpstreamForm.nodesInner.host')" name="host">
+          <t-form-item :label="t('components.apisixUpstreamForm.nodesInner.host')" name="host">
             <t-input
               v-model="nodeItem.host"
-              :placeholder="$t('components.apisixUpstreamForm.nodesInner.hostPlaceholder')"
+              :placeholder="t('components.apisixUpstreamForm.nodesInner.hostPlaceholder')"
             />
           </t-form-item>
-          <t-form-item :label="$t('components.apisixUpstreamForm.nodesInner.port')" name="port">
+          <t-form-item :label="t('components.apisixUpstreamForm.nodesInner.port')" name="port">
             <t-input-number
               v-model="nodeItem.port"
               theme="normal"
-              :placeholder="$t('components.apisixUpstreamForm.nodesInner.portPlaceholder')"
+              :placeholder="t('components.apisixUpstreamForm.nodesInner.portPlaceholder')"
               min="1"
               max="65535"
             />
           </t-form-item>
-          <t-form-item :label="$t('components.apisixUpstreamForm.nodesInner.weight')" name="weight">
+          <t-form-item :label="t('components.apisixUpstreamForm.nodesInner.weight')" name="weight">
             <t-input-number
               v-model="nodeItem.weight"
               theme="normal"
-              :placeholder="$t('components.apisixUpstreamForm.nodesInner.weightPlaceholder')"
+              :placeholder="t('components.apisixUpstreamForm.nodesInner.weightPlaceholder')"
               min="0"
             />
           </t-form-item>
           <t-button theme="danger" style="margin-left: var(--td-comp-margin-xxl)" @click="onRemoveUpstreamNode(index)">
-            {{ $t('components.apisixUpstreamForm.removeNode') }}
+            {{ t('components.apisixUpstreamForm.removeNode') }}
           </t-button>
         </t-form>
         <t-button @click="onAddUpstreamNode">
-          {{ $t('components.apisixUpstreamForm.addNode') }}
+          {{ t('components.apisixUpstreamForm.addNode') }}
         </t-button>
       </div>
     </t-form-item>
@@ -132,7 +132,6 @@ const emit = defineEmits<{
 const root = defineModel({
   type: Object as PropType<ApisixAdminRoutesPostRequestUpstream>,
   default: {},
-  local: false,
 });
 
 const nodesForms = ref<FormInstanceFunctions[]>([]);

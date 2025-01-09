@@ -6,16 +6,16 @@
         <t-card :bordered="false">
           <t-steps class="step-container" :current="activeStep - 1" status="process">
             <t-step-item
-              :title="$t('pages.apisixUpstreamEdit.step1.title')"
-              :content="$t('pages.apisixUpstreamEdit.step1.subtitle')"
+              :title="t('pages.apisixUpstreamEdit.step1.title')"
+              :content="t('pages.apisixUpstreamEdit.step1.subtitle')"
             />
             <t-step-item
-              :title="$t('pages.apisixUpstreamEdit.step2.title')"
-              :content="$t('pages.apisixUpstreamEdit.step2.subtitle')"
+              :title="t('pages.apisixUpstreamEdit.step2.title')"
+              :content="t('pages.apisixUpstreamEdit.step2.subtitle')"
             />
             <t-step-item
-              :title="$t('pages.apisixUpstreamEdit.step3.title')"
-              :content="$t('pages.apisixUpstreamEdit.step3.subtitle')"
+              :title="t('pages.apisixUpstreamEdit.step3.title')"
+              :content="t('pages.apisixUpstreamEdit.step3.subtitle')"
             />
           </t-steps>
         </t-card>
@@ -26,15 +26,15 @@
         <upstream-form v-show="activeStep === 1" v-model="formData" class="step-form" @submit="onNextStep">
           <t-form-item>
             <t-button disabled theme="default" variant="base" @click="onPreStep">
-              {{ $t('pages.apisixUpstreamEdit.preStep') }}
+              {{ t('pages.apisixUpstreamEdit.preStep') }}
             </t-button>
-            <t-button type="submit" theme="primary"> {{ $t('pages.apisixUpstreamEdit.nextStep') }} </t-button>
+            <t-button type="submit" theme="primary"> {{ t('pages.apisixUpstreamEdit.nextStep') }} </t-button>
           </t-form-item>
         </upstream-form>
 
         <!-- 分步表单2 预览 -->
         <t-form v-show="activeStep === 2" class="step-form" :data="formData" :rules="FORM_RULES_2" @submit="onSubmit">
-          <t-form-item :label="$t('pages.apisixUpstreamEdit.step2.title')">
+          <t-form-item :label="t('pages.apisixUpstreamEdit.step2.title')">
             <code-editor
               ref="previewEditorRef"
               v-model:value="previewEditorData"
@@ -44,23 +44,23 @@
           </t-form-item>
           <t-form-item>
             <t-button theme="default" variant="base" @click="onPreStep">{{
-              $t('pages.apisixUpstreamEdit.preStep')
+              t('pages.apisixUpstreamEdit.preStep')
             }}</t-button>
-            <t-button type="submit" theme="primary"> {{ $t('pages.apisixUpstreamEdit.submit') }} </t-button>
+            <t-button type="submit" theme="primary"> {{ t('pages.apisixUpstreamEdit.submit') }} </t-button>
           </t-form-item>
         </t-form>
 
         <!-- 分步表单3 完成 -->
         <div v-show="activeStep === 4" class="result-success">
           <t-icon class="result-success-icon" name="check-circle" />
-          <div class="result-success-title">{{ $t('pages.apisixUpstreamEdit.step3.successTitle') }}</div>
-          <div class="result-success-describe">{{ $t('pages.apisixUpstreamEdit.step3.successDescribe') }}</div>
+          <div class="result-success-title">{{ t('pages.apisixUpstreamEdit.step3.successTitle') }}</div>
+          <div class="result-success-describe">{{ t('pages.apisixUpstreamEdit.step3.successDescribe') }}</div>
           <div>
             <t-button @click="onComplete">
-              {{ $t('pages.apisixUpstreamEdit.step3.complete') }}
+              {{ t('pages.apisixUpstreamEdit.step3.complete') }}
             </t-button>
             <t-button theme="default" @click="onReapply">
-              {{ $t('pages.apisixUpstreamEdit.step3.reapply') }}
+              {{ t('pages.apisixUpstreamEdit.step3.reapply') }}
             </t-button>
           </div>
         </div>

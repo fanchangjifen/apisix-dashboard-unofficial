@@ -5,10 +5,10 @@
         <div class="left-operation-container">
           <t-button @click="handleCreate"> {{ t('pages.apisixSecret.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.apisixSecret.export') }}</t-button
+            {{ t('pages.apisixSecret.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.apisixSecret.selectedCount', { num: selectedRowKeys.length }) }}
+            {{ t('pages.apisixSecret.selectedCount', { num: selectedRowKeys.length }) }}
           </p>
         </div>
         <div class="search-input">
@@ -61,13 +61,13 @@
         <template #op="slotProps: BaseTableCellParams<Item>">
           <t-space>
             <t-link theme="primary" @click="handleClickView(slotProps)">
-              {{ $t('pages.apisixSecret.operations.view') }}</t-link
+              {{ t('pages.apisixSecret.operations.view') }}</t-link
             >
             <t-link theme="primary" @click="handleClickEdit(slotProps)">
-              {{ $t('pages.apisixSecret.operations.edit') }}</t-link
+              {{ t('pages.apisixSecret.operations.edit') }}</t-link
             >
             <t-link theme="danger" @click="handleClickDelete(slotProps)">
-              {{ $t('pages.apisixSecret.operations.delete') }}</t-link
+              {{ t('pages.apisixSecret.operations.delete') }}</t-link
             >
           </t-space>
         </template>
@@ -82,14 +82,14 @@
     >
       <p v-if="deleteIdx.length === 1">
         {{
-          $t('pages.apisixSecret.deleteConfirm.deleteOne', {
+          t('pages.apisixSecret.deleteConfirm.deleteOne', {
             name: data[deleteIdx[0]]?.value?.id,
           })
         }}
       </p>
       <p v-if="deleteIdx.length > 1">
         {{
-          $t('pages.apisixSecret.deleteConfirm.deleteMulti', {
+          t('pages.apisixSecret.deleteConfirm.deleteMulti', {
             name: data[deleteIdx[0]]?.value?.id,
             num: deleteIdx.length,
           })

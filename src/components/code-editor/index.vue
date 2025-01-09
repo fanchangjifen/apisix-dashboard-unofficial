@@ -37,7 +37,6 @@ const props = defineProps({
 const code = defineModel('value', {
   type: String,
   default: '',
-  local: false,
 });
 const loading = ref(false);
 

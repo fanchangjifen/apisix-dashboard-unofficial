@@ -5,10 +5,10 @@
         <div class="left-operation-container">
           <t-button @click="handleCreate"> {{ t('pages.apisixGlobalRule.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.apisixGlobalRule.export') }}</t-button
+            {{ t('pages.apisixGlobalRule.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.apisixGlobalRule.selectedCount', { num: selectedRowKeys.length }) }}
+            {{ t('pages.apisixGlobalRule.selectedCount', { num: selectedRowKeys.length }) }}
           </p>
         </div>
         <div class="search-input">
@@ -58,13 +58,13 @@
         <template #op="slotProps: BaseTableCellParams<Item>">
           <t-space>
             <t-link theme="primary" @click="handleClickView(slotProps)">
-              {{ $t('pages.apisixGlobalRule.operations.view') }}</t-link
+              {{ t('pages.apisixGlobalRule.operations.view') }}</t-link
             >
             <t-link theme="primary" @click="handleClickEdit(slotProps)">
-              {{ $t('pages.apisixGlobalRule.operations.edit') }}</t-link
+              {{ t('pages.apisixGlobalRule.operations.edit') }}</t-link
             >
             <t-link theme="danger" @click="handleClickDelete(slotProps)">
-              {{ $t('pages.apisixGlobalRule.operations.delete') }}</t-link
+              {{ t('pages.apisixGlobalRule.operations.delete') }}</t-link
             >
           </t-space>
         </template>
@@ -79,14 +79,14 @@
     >
       <p v-if="deleteIdx.length === 1">
         {{
-          $t('pages.apisixGlobalRule.deleteConfirm.deleteOne', {
+          t('pages.apisixGlobalRule.deleteConfirm.deleteOne', {
             name: data[deleteIdx[0]]?.value?.id,
           })
         }}
       </p>
       <p v-if="deleteIdx.length > 1">
         {{
-          $t('pages.apisixGlobalRule.deleteConfirm.deleteMulti', {
+          t('pages.apisixGlobalRule.deleteConfirm.deleteMulti', {
             name: data[deleteIdx[0]]?.value?.id,
             num: deleteIdx.length,
           })

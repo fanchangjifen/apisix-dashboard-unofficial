@@ -5,10 +5,10 @@
         <div class="left-operation-container">
           <t-button @click="handleCreate"> {{ t('pages.apisixRoute.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.apisixRoute.export') }}</t-button
+            {{ t('pages.apisixRoute.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.apisixRoute.selectedCount', { num: selectedRowKeys.length }) }}
+            {{ t('pages.apisixRoute.selectedCount', { num: selectedRowKeys.length }) }}
           </p>
         </div>
         <div class="search-input">
@@ -83,13 +83,13 @@
         <template #op="slotProps: BaseTableCellParams<Item>">
           <t-space>
             <t-link theme="primary" @click="handleClickView(slotProps)">
-              {{ $t('pages.apisixRoute.operations.view') }}</t-link
+              {{ t('pages.apisixRoute.operations.view') }}</t-link
             >
             <t-link theme="primary" @click="handleClickEdit(slotProps)">
-              {{ $t('pages.apisixRoute.operations.edit') }}</t-link
+              {{ t('pages.apisixRoute.operations.edit') }}</t-link
             >
             <t-link theme="danger" @click="handleClickDelete(slotProps)">
-              {{ $t('pages.apisixRoute.operations.delete') }}</t-link
+              {{ t('pages.apisixRoute.operations.delete') }}</t-link
             >
           </t-space>
         </template>
@@ -104,14 +104,14 @@
     >
       <p v-if="deleteIdx.length === 1">
         {{
-          $t('pages.apisixRoute.deleteConfirm.deleteOne', {
+          t('pages.apisixRoute.deleteConfirm.deleteOne', {
             name: data[deleteIdx[0]]?.value?.name,
           })
         }}
       </p>
       <p v-if="deleteIdx.length > 1">
         {{
-          $t('pages.apisixRoute.deleteConfirm.deleteMulti', {
+          t('pages.apisixRoute.deleteConfirm.deleteMulti', {
             name: data[deleteIdx[0]]?.value?.name,
             num: deleteIdx.length,
           })

@@ -6,20 +6,20 @@
         <t-card :bordered="false">
           <t-steps class="step-container" :current="activeStep - 1" status="process">
             <t-step-item
-              :title="$t('pages.apisixConsumerEdit.step1.title')"
-              :content="$t('pages.apisixConsumerEdit.step1.subtitle')"
+              :title="t('pages.apisixConsumerEdit.step1.title')"
+              :content="t('pages.apisixConsumerEdit.step1.subtitle')"
             />
             <t-step-item
-              :title="$t('pages.apisixConsumerEdit.step2.title')"
-              :content="$t('pages.apisixConsumerEdit.step2.subtitle')"
+              :title="t('pages.apisixConsumerEdit.step2.title')"
+              :content="t('pages.apisixConsumerEdit.step2.subtitle')"
             />
             <t-step-item
-              :title="$t('pages.apisixConsumerEdit.step3.title')"
-              :content="$t('pages.apisixConsumerEdit.step3.subtitle')"
+              :title="t('pages.apisixConsumerEdit.step3.title')"
+              :content="t('pages.apisixConsumerEdit.step3.subtitle')"
             />
             <t-step-item
-              :title="$t('pages.apisixConsumerEdit.step4.title')"
-              :content="$t('pages.apisixConsumerEdit.step4.subtitle')"
+              :title="t('pages.apisixConsumerEdit.step4.title')"
+              :content="t('pages.apisixConsumerEdit.step4.subtitle')"
             />
           </t-steps>
         </t-card>
@@ -50,28 +50,28 @@
 
           <t-form-item>
             <t-button disabled theme="default" variant="base" @click="onPreStep">
-              {{ $t('pages.apisixConsumerEdit.preStep') }}
+              {{ t('pages.apisixConsumerEdit.preStep') }}
             </t-button>
-            <t-button type="submit" theme="primary"> {{ $t('pages.apisixConsumerEdit.nextStep') }} </t-button>
+            <t-button type="submit" theme="primary"> {{ t('pages.apisixConsumerEdit.nextStep') }} </t-button>
           </t-form-item>
         </t-form>
 
         <!-- 分步表单2 插件配置 -->
         <t-form v-show="activeStep === 2" class="step-form" :data="formData" :rules="FORM_RULES_2" @submit="onNextStep">
-          <t-form-item :label="$t('pages.apisixConsumerEdit.step2.title')">
+          <t-form-item :label="t('pages.apisixConsumerEdit.step2.title')">
             <code-editor ref="pluginEditorRef" v-model:value="pluginEditorData" language="json" />
           </t-form-item>
           <t-form-item>
             <t-button theme="default" variant="base" @click="onPreStep">{{
-              $t('pages.apisixConsumerEdit.preStep')
+              t('pages.apisixConsumerEdit.preStep')
             }}</t-button>
-            <t-button type="submit" theme="primary"> {{ $t('pages.apisixConsumerEdit.nextStep') }} </t-button>
+            <t-button type="submit" theme="primary"> {{ t('pages.apisixConsumerEdit.nextStep') }} </t-button>
           </t-form-item>
         </t-form>
 
         <!-- 分步表单3 预览 -->
         <t-form v-show="activeStep === 3" class="step-form" :data="formData" :rules="FORM_RULES_3" @submit="onSubmit">
-          <t-form-item :label="$t('pages.apisixConsumerEdit.step3.title')">
+          <t-form-item :label="t('pages.apisixConsumerEdit.step3.title')">
             <code-editor
               ref="previewEditorRef"
               v-model:value="previewEditorData"
@@ -81,23 +81,23 @@
           </t-form-item>
           <t-form-item>
             <t-button theme="default" variant="base" @click="onPreStep">{{
-              $t('pages.apisixConsumerEdit.preStep')
+              t('pages.apisixConsumerEdit.preStep')
             }}</t-button>
-            <t-button type="submit" theme="primary"> {{ $t('pages.apisixConsumerEdit.submit') }} </t-button>
+            <t-button type="submit" theme="primary"> {{ t('pages.apisixConsumerEdit.submit') }} </t-button>
           </t-form-item>
         </t-form>
 
         <!-- 分步表单4 完成 -->
         <div v-show="activeStep === 4" class="result-success">
           <t-icon class="result-success-icon" name="check-circle" />
-          <div class="result-success-title">{{ $t('pages.apisixConsumerEdit.step4.successTitle') }}</div>
-          <div class="result-success-describe">{{ $t('pages.apisixConsumerEdit.step4.successDescribe') }}</div>
+          <div class="result-success-title">{{ t('pages.apisixConsumerEdit.step4.successTitle') }}</div>
+          <div class="result-success-describe">{{ t('pages.apisixConsumerEdit.step4.successDescribe') }}</div>
           <div>
             <t-button @click="onComplete">
-              {{ $t('pages.apisixConsumerEdit.step4.complete') }}
+              {{ t('pages.apisixConsumerEdit.step4.complete') }}
             </t-button>
             <t-button theme="default" @click="onReapply">
-              {{ $t('pages.apisixConsumerEdit.step4.reapply') }}
+              {{ t('pages.apisixConsumerEdit.step4.reapply') }}
             </t-button>
           </div>
         </div>

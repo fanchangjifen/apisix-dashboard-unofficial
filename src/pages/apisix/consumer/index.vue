@@ -5,10 +5,10 @@
         <div class="left-operation-container">
           <t-button @click="handleCreate"> {{ t('pages.apisixConsumer.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.apisixConsumer.export') }}</t-button
+            {{ t('pages.apisixConsumer.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.apisixConsumer.selectedCount', { num: selectedRowKeys.length }) }}
+            {{ t('pages.apisixConsumer.selectedCount', { num: selectedRowKeys.length }) }}
           </p>
         </div>
         <div class="search-input">
@@ -67,13 +67,13 @@
         <template #op="slotProps: BaseTableCellParams<Item>">
           <t-space>
             <t-link theme="primary" @click="handleClickView(slotProps)">
-              {{ $t('pages.apisixConsumer.operations.view') }}</t-link
+              {{ t('pages.apisixConsumer.operations.view') }}</t-link
             >
             <t-link theme="primary" @click="handleClickEdit(slotProps)">
-              {{ $t('pages.apisixConsumer.operations.edit') }}</t-link
+              {{ t('pages.apisixConsumer.operations.edit') }}</t-link
             >
             <t-link theme="danger" @click="handleClickDelete(slotProps)">
-              {{ $t('pages.apisixConsumer.operations.delete') }}</t-link
+              {{ t('pages.apisixConsumer.operations.delete') }}</t-link
             >
           </t-space>
         </template>
@@ -88,14 +88,14 @@
     >
       <p v-if="deleteIdx.length === 1">
         {{
-          $t('pages.apisixConsumer.deleteConfirm.deleteOne', {
+          t('pages.apisixConsumer.deleteConfirm.deleteOne', {
             name: data[deleteIdx[0]]?.value?.username,
           })
         }}
       </p>
       <p v-if="deleteIdx.length > 1">
         {{
-          $t('pages.apisixConsumer.deleteConfirm.deleteMulti', {
+          t('pages.apisixConsumer.deleteConfirm.deleteMulti', {
             name: data[deleteIdx[0]]?.value?.username,
             num: deleteIdx.length,
           })
