@@ -29,17 +29,6 @@ export default [
           },
         },
       },
-      {
-        path: 'detail',
-        name: 'DashboardDetail',
-        component: () => import('@/pages/dashboard/detail/index.vue'),
-        meta: {
-          title: {
-            zh_CN: '统计报表',
-            en_US: 'Dashboard Detail',
-          },
-        },
-      },
     ],
   },
 ];
