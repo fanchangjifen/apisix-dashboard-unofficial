@@ -8,8 +8,12 @@
     @submit="onSubmit"
   >
     <template v-if="type == 'password'">
-      <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" :placeholder="`${t('pages.login.input.account')}：admin`">
+      <t-form-item name="apisixAdminEndpoint">
+        <t-input
+          v-model="formData.apisixAdminEndpoint"
+          size="large"
+          :placeholder="`${t('pages.login.input.apisixAdminEndpoint')}：http://127.0.0.1:9180`"
+        >
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -18,11 +22,11 @@
 
       <t-form-item name="password">
         <t-input
-          v-model="formData.password"
+          v-model="formData.apisixAdminKey"
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          :placeholder="`${t('pages.login.input.password')}：admin`"
+          :placeholder="`${t('pages.login.input.apisixAdminKey')}：xxxxxxxxxxxx`"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -93,18 +97,24 @@ import { useUserStore } from '@/store';
 
 const userStore = useUserStore();
 
+const env = import.meta.env.MODE || 'development';
+
 const INITIAL_DATA = {
   phone: '',
-  account: 'admin',
-  password: 'admin',
+  // 如果是mock模式 或 没启用直连代理
+  apisixAdminEndpoint:
+    env === 'mock' || import.meta.env.VITE_IS_REQUEST_PROXY !== 'true'
+      ? import.meta.env.VITE_APISIX_ADMIN_API_PROXY_ENDPOINT // 就不配置host 会走本地Mock拦截 或 Vite 代理
+      : import.meta.env.VITE_APISIX_ADMIN_API_ENDPOINT, // 直连
+  apisixAdminKey: '',
   verifyCode: '',
   checked: false,
 };
 
 const FORM_RULES: Record<string, FormRule[]> = {
   phone: [{ required: true, message: t('pages.login.required.phone'), type: 'error' }],
-  account: [{ required: true, message: t('pages.login.required.account'), type: 'error' }],
-  password: [{ required: true, message: t('pages.login.required.password'), type: 'error' }],
+  apisixAdminEndpoint: [{ required: true, message: t('pages.login.required.apisixAdminEndpoint'), type: 'error' }],
+  apisixAdminKey: [{ required: true, message: t('pages.login.required.apisixAdminKey'), type: 'error' }],
   verifyCode: [{ required: true, message: t('pages.login.required.verification'), type: 'error' }],
 };
 
@@ -137,7 +147,7 @@ const sendCode = () => {
 const onSubmit = async (ctx: SubmitContext) => {
   if (ctx.validateResult === true) {
     try {
-      await userStore.login(formData.value);
+      await userStore.login(formData.value.apisixAdminEndpoint, formData.value.apisixAdminKey);
 
       MessagePlugin.success('登录成功');
       const redirect = route.query.redirect as string;

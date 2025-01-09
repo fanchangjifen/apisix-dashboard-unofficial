@@ -19,6 +19,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
+    "@guolao/vue-monaco-editor": "^1.5.4",
     "@vueuse/core": "^12.3.0",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",

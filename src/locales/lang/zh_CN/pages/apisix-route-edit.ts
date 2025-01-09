@@ -1,0 +1,38 @@
+export default {
+  preStep: '上一步',
+  nextStep: '下一步',
+  submit: '提交',
+  submitError: '提交失败：{message}',
+  step1: {
+    title: '设置路由信息',
+    subtitle: '设置路由信息',
+    basic: '基本信息',
+    name: '名称',
+    namePlaceholder: '请输入路由名称',
+    desc: '描述',
+    descPlaceholder: '请输入路由描述（内容不超过 256 个字符）',
+    host: '域名',
+    hostPlaceholder: '请输入 HTTP 请求域名',
+    methods: 'HTTP 方法',
+    methodsPlaceholder: '请选择',
+    uri: '路径',
+    uriPlaceholder: '请输入 HTTP 请求路径',
+    upstream: '上游',
+  },
+  step2: {
+    title: '插件配置',
+    subtitle: '插件配置',
+  },
+  step3: {
+    title: '预览',
+    subtitle: '预览',
+  },
+  step4: {
+    title: '完成',
+    subtitle: '完成',
+    successTitle: '提交成功',
+    successDescribe: '提交成功',
+    complete: '返回路由列表',
+    reapply: '创建新路由',
+  },
+};

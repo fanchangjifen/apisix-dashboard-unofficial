@@ -10,7 +10,8 @@ const CWD = process.cwd();
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const { VITE_BASE_URL, VITE_API_URL_PREFIX } = loadEnv(mode, CWD);
+  const { VITE_IS_REQUEST_PROXY, VITE_BASE_URL, VITE_APISIX_ADMIN_API_ENDPOINT, VITE_APISIX_ADMIN_API_PROXY_ENDPOINT } =
+    loadEnv(mode, CWD);
   return {
     base: VITE_BASE_URL,
     resolve: {
@@ -38,15 +39,45 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         mockPath: 'mock',
         enable: true,
       }),
-      svgLoader(),
+      svgLoader({
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {},
+              },
+            },
+            {
+              name: 'prefixIds',
+              params: {
+                delim: '__',
+                prefixIds: true,
+                prefixClassNames: true,
+              },
+            },
+          ],
+        },
+      }),
     ],
 
     server: {
       port: 3002,
       host: '0.0.0.0',
-      proxy: {
-        [VITE_API_URL_PREFIX]: 'http://127.0.0.1:3000/',
-      },
+      // 项目是否启动请求代理
+      proxy:
+        // tips: 如果VITE_IS_REQUEST_PROXY为true则采用该配置文件中的地址请求，会绕过vite.config.js中设置的代理
+        // NOTE: 仔细看字👆，tdesign不知道为什么起这个变量名
+        VITE_IS_REQUEST_PROXY !== 'true'
+          ? {
+              // apisix admin
+              [VITE_APISIX_ADMIN_API_PROXY_ENDPOINT]: {
+                target: VITE_APISIX_ADMIN_API_ENDPOINT,
+                rewrite: (path) => path.replace(new RegExp(`^${VITE_APISIX_ADMIN_API_PROXY_ENDPOINT}`), ''),
+                secure: false,
+              },
+            }
+          : undefined,
     },
   };
 };
