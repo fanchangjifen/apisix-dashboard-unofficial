@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import { PluginApi } from '@/api/apisix/admin';
 import { usePermissionStore } from '@/store';
 import type { UserInfo } from '@/types/interface';
 
@@ -10,11 +11,11 @@ const InitUserInfo: UserInfo = {
 
 export const useUserStore = defineStore('user', {
   state: () => ({
+    keepLogin: false,
     token: '', // 默认token不走权限
     apisixAdminEndpoint: '',
-    apisixAdminKey: '',
     apisixControlEndpoint: '',
-    apisixControlKey: '',
+    apisixAdminKey: '',
     userInfo: { ...InitUserInfo },
   }),
   getters: {
@@ -23,27 +24,28 @@ export const useUserStore = defineStore('user', {
     },
   },
   actions: {
-    async login(apisixAdminEndpoint: string, apisixAdminKey: string) {
+    async login(
+      apisixAdminEndpoint: string,
+      apisixControlEndpoint: string,
+      apisixAdminKey: string,
+      keepLogin?: boolean,
+    ) {
       this.apisixAdminEndpoint = apisixAdminEndpoint;
+      this.apisixControlEndpoint = apisixControlEndpoint;
       this.apisixAdminKey = apisixAdminKey;
+
+      await PluginApi.apisixAdminPluginsListGet();
+
+      this.keepLogin = keepLogin;
+
       this.token = 'main_token';
     },
     async getUserInfo() {
-      const mockRemoteUserInfo = async (token: string) => {
-        if (token === 'main_token') {
-          return {
-            name: 'Tencent',
-            roles: ['all'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
-          };
-        }
-        return {
-          name: 'td_dev',
-          roles: ['UserIndex', 'DashboardBase', 'login'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
-        };
+      await PluginApi.apisixAdminPluginsListGet();
+      this.userInfo = {
+        name: 'admin',
+        roles: ['all'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
       };
-      const res = await mockRemoteUserInfo(this.token);
-
-      this.userInfo = res;
     },
     async logout() {
       this.token = '';
@@ -52,10 +54,14 @@ export const useUserStore = defineStore('user', {
   },
   persist: {
     afterRestore: (ctx) => {
+      if (!ctx.store.$state.keepLogin) {
+        ctx.store.$reset();
+      }
+
       const permissionStore = usePermissionStore();
       permissionStore.initRoutes(ctx.store.$state.userInfo.roles);
     },
     key: 'user',
-    paths: ['token'],
+    paths: ['keepLogin', 'token', 'apisixAdminEndpoint', 'apisixControlEndpoint', 'apisixAdminKey'],
   },
 });

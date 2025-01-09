@@ -6,11 +6,9 @@ import * as control from './control/typescript-axios';
 
 const axiosInstance = axios.create();
 
-const userStore = useUserStore();
-
 axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-  config.baseURL = userStore.apisixAdminEndpoint;
-  config.headers.set('X-API-Key', userStore.apisixAdminKey);
+  const userStore = useUserStore();
+  config.baseURL = userStore.apisixControlEndpoint;
   return config;
 });
 

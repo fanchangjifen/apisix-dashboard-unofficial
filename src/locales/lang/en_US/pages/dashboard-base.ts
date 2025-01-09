@@ -16,6 +16,10 @@ export default {
     info: 'Detail',
   },
   topPanel: {
+    unknown: 'Unknown',
+    healthy: 'Healthy',
+    unhealthy: 'Unhealthy',
+    upstreamsStatus: 'Upstreams Status',
     card1: 'Total Revenue',
     card2: 'Total Refund',
     card3: 'Active User(s)',

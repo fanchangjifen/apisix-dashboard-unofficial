@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
+import LogoFullIcon from '@/assets/apisix_svg_full.svg?component';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();

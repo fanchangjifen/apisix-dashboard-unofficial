@@ -10,8 +10,14 @@ const CWD = process.cwd();
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const { VITE_IS_REQUEST_PROXY, VITE_BASE_URL, VITE_APISIX_ADMIN_API_ENDPOINT, VITE_APISIX_ADMIN_API_PROXY_ENDPOINT } =
-    loadEnv(mode, CWD);
+  const {
+    VITE_IS_REQUEST_PROXY,
+    VITE_BASE_URL,
+    VITE_APISIX_ADMIN_API_ENDPOINT,
+    VITE_APISIX_ADMIN_API_PROXY_ENDPOINT,
+    VITE_APISIX_CONTROL_API_ENDPOINT,
+    VITE_APISIX_CONTROL_API_PROXY_ENDPOINT,
+  } = loadEnv(mode, CWD);
   return {
     base: VITE_BASE_URL,
     resolve: {
@@ -74,6 +80,12 @@ export default ({ mode }: ConfigEnv): UserConfig => {
               [VITE_APISIX_ADMIN_API_PROXY_ENDPOINT]: {
                 target: VITE_APISIX_ADMIN_API_ENDPOINT,
                 rewrite: (path) => path.replace(new RegExp(`^${VITE_APISIX_ADMIN_API_PROXY_ENDPOINT}`), ''),
+                secure: false,
+              },
+              // apisix control
+              [VITE_APISIX_CONTROL_API_PROXY_ENDPOINT]: {
+                target: VITE_APISIX_CONTROL_API_ENDPOINT,
+                rewrite: (path) => path.replace(new RegExp(`^${VITE_APISIX_CONTROL_API_PROXY_ENDPOINT}`), ''),
                 secure: false,
               },
             }

@@ -17,6 +17,10 @@ export default {
     info: '详情',
   },
   topPanel: {
+    unknown: '未知',
+    healthy: '健康',
+    unhealthy: '故障',
+    upstreamsStatus: '上游状态',
     card1: '总收入',
     card2: '总退款',
     card3: '活跃用户（个）',

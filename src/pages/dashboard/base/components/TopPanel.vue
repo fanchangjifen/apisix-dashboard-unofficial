@@ -1,5 +1,30 @@
 <template>
   <t-row :gutter="[16, 16]">
+    <t-col :xs="6" :xl="3">
+      <t-card
+        :title="t('pages.dashboardBase.topPanel.upstreamsStatus')"
+        :bordered="false"
+        :class="{ 'dashboard-item': true, 'dashboard-item--unhealty': true }"
+      >
+        <div class="dashboard-item-top">
+          <span>
+            {{
+              upstreamHealthRes
+                ? //健康数量===总数
+                  healthyUpstreams.values.length === upstreamHealthRes.length
+                  ? t('pages.dashboardBase.topPanel.healthy')
+                  : t('pages.dashboardBase.topPanel.unhealthy')
+                : t('pages.dashboardBase.topPanel.unknown')
+            }}
+          </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span>
+            {{ upstreamHealthRes ? `${healthyUpstreams.values.length}/${upstreamHealthRes.length}` : '' }}
+          </span>
+        </div>
+      </t-card>
+    </t-col>
+
     <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
       <t-card
         :title="t(item.title)"
@@ -60,8 +85,9 @@ import { BarChart, LineChart } from 'echarts/charts';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { FileIcon, UsergroupIcon } from 'tdesign-icons-vue-next';
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
+import { HealthCheckApi } from '@/api/apisix/control';
 // 导入样式
 import Trend from '@/components/trend/index.vue';
 import { t } from '@/locales';
@@ -80,25 +106,21 @@ const PANE_LIST = [
     title: 'pages.dashboardBase.topPanel.card1',
     number: '¥ 28,425.00',
     upTrend: '20.5%',
-    leftType: 'echarts-line',
   },
   {
     title: 'pages.dashboardBase.topPanel.card2',
     number: '¥ 768.00',
     downTrend: '20.5%',
-    leftType: 'echarts-bar',
   },
   {
     title: 'pages.dashboardBase.topPanel.card3',
     number: '1126',
     upTrend: '20.5%',
-    leftType: 'icon-usergroup',
   },
   {
     title: 'pages.dashboardBase.topPanel.card4',
     number: 527,
     downTrend: '20.5%',
-    leftType: 'icon-file-paste',
   },
 ];
 
@@ -148,11 +170,43 @@ const updateContainer = () => {
   });
 };
 
-onMounted(() => {
+type UpstreamHealth = {
+  nodes?: Array<{
+    ip: string;
+    counter: {
+      http_failure: string;
+      success: number;
+      timeout_failure: number;
+      tcp_failure: number;
+    };
+    port: number;
+    status: 'healthy' | 'unhealthy' | 'mostly_healthy' | 'mostly_unhealthy';
+  }>;
+  name?: string;
+  type?: 'http' | 'https' | 'tcp';
+};
+
+const upstreamHealthRes = ref<Array<UpstreamHealth> | undefined>();
+
+onMounted(async () => {
+  const res = await HealthCheckApi.v1HealthcheckGet();
+  if (Array.isArray(res.data)) {
+    upstreamHealthRes.value = res.data;
+  }
+
   renderCharts();
   nextTick(() => {
     updateContainer();
   });
+});
+
+const isNodesHealthy = (nodes: UpstreamHealth['nodes']) => {
+  const unhealthyIndex = nodes.findIndex((n) => n.status !== 'healthy');
+  return unhealthyIndex < 0;
+};
+
+const healthyUpstreams = computed(() => {
+  return upstreamHealthRes.value.filter((u) => isNodesHealthy(u.nodes));
 });
 
 const { width, height } = useWindowSize();
@@ -271,6 +325,27 @@ watch(
   // 针对第一个卡片需要反色处理
   &--main-color {
     background: var(--td-brand-color);
+    color: var(--td-text-color-primary);
+
+    :deep(.t-card__title),
+    .dashboard-item-top span,
+    .dashboard-item-bottom {
+      color: var(--td-text-color-anti);
+    }
+
+    .dashboard-item-block {
+      color: var(--td-text-color-anti);
+      opacity: 0.6;
+    }
+
+    .dashboard-item-bottom {
+      color: var(--td-text-color-anti);
+    }
+  }
+
+  // 非健康卡片
+  &--unhealty {
+    background: var(--td-error-color);
     color: var(--td-text-color-primary);
 
     :deep(.t-card__title),
