@@ -36,16 +36,6 @@ export interface UserInfo {
   roles: string[];
 }
 
-export interface NotificationItem {
-  id: string;
-  content: string;
-  type: string;
-  status: boolean;
-  collected: boolean;
-  date: string;
-  quality: string;
-}
-
 export interface TRouterInfo {
   path: string;
   query?: LocationQueryRaw;

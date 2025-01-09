@@ -9,7 +9,6 @@
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
             <t-icon class="collapsed-icon" name="view-list" />
           </t-button>
-          <search :layout="layout" />
         </div>
       </template>
       <template v-if="layout !== 'side'" #default>
@@ -17,12 +16,6 @@
       </template>
       <template #operations>
         <div class="operations-container">
-          <!-- 搜索框 -->
-          <search v-if="layout !== 'side'" :layout="layout" />
-
-          <!-- 全局通知 -->
-          <notice />
-
           <t-tooltip placement="bottom" :content="t('layout.header.code')">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
               <t-icon name="logo-github" />
@@ -92,8 +85,6 @@ import { useSettingStore, useUserStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
-import Notice from './Notice.vue';
-import Search from './Search.vue';
 
 const { theme, layout, showLogo, menu, isFixed, isCompact } = defineProps({
   theme: {
@@ -176,11 +167,11 @@ const handleLogout = () => {
 };
 
 const navToGitHub = () => {
-  window.open('https://github.com/tencent/tdesign-vue-next-starter');
+  window.open('https://github.com/Lensual/apisix-dashboard-unofficial');
 };
 
 const navToHelper = () => {
-  window.open('http://tdesign.tencent.com/starter/docs/get-started');
+  window.open('https://apisix.apache.org/docs/apisix/admin-api/');
 };
 </script>
 <style lang="less" scoped>

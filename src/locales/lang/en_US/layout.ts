@@ -6,21 +6,12 @@ export default {
     signOut: 'Sign Out',
     setting: 'Setting',
   },
-  notice: {
-    title: 'Notification Center',
-    clear: 'Clear',
-    setRead: 'Set Read',
-    empty: 'Empty',
-    emptyNotice: 'No Notice',
-    viewAll: 'View All',
-  },
   tagTabs: {
     closeOther: 'close other',
     closeLeft: 'close left',
     closeRight: 'close right',
     refresh: 'refresh',
   },
-  searchPlaceholder: 'Enter search content',
   setting: {
     title: 'Setting',
     theme: {

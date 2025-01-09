@@ -6,15 +6,6 @@ export default {
     signOut: '退出登录',
     setting: '系统设置',
   },
-  notice: {
-    title: '通知中心',
-    clear: '清空',
-    setRead: '设为已读',
-    empty: '空',
-    emptyNotice: '暂无通知',
-    viewAll: '查看全部',
-  },
-  searchPlaceholder: '请输入搜索内容',
   tagTabs: {
     closeOther: '关闭其他',
     closeLeft: '关闭左侧',
