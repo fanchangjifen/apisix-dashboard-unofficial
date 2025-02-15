@@ -1,8 +1,49 @@
+// constants.ts
 import merge from 'lodash/merge';
 import { FormRule } from 'tdesign-vue-next';
 
+import { t } from '@/locales';
+
 export const FORM_RULES_1: Record<string, FormRule[]> = {
-  uri: [{ required: true, type: 'error' }],
+  uri: [
+    {
+      required: true,
+      message: t('pages.apisixRouteEdit.validation.uriRequired'),
+      type: 'error',
+    },
+  ],
+  'proxyRewrite.uri': [
+    {
+      required: true,
+      message: t('pages.apisixRouteEdit.validation.proxyRewrite.staticUriRequired'),
+      type: 'error',
+      trigger: 'blur',
+    },
+  ],
+  'proxyRewrite.regexMatch': [
+    {
+      required: true,
+      message: t('pages.apisixRouteEdit.validation.proxyRewrite.regexMatchRequired'),
+      type: 'error',
+      trigger: 'blur',
+    },
+  ],
+  'proxyRewrite.regexTemplate': [
+    {
+      required: true,
+      message: t('pages.apisixRouteEdit.validation.proxyRewrite.regexTemplateRequired'),
+      type: 'error',
+      trigger: 'blur',
+    },
+  ],
+  'proxyRewrite.host': [
+    {
+      required: true,
+      message: t('pages.apisixRouteEdit.validation.proxyRewrite.hostRequired'),
+      type: 'error',
+      trigger: 'blur',
+    },
+  ],
 };
 
 export const FORM_RULES_2: Record<string, FormRule[]> = merge({}, FORM_RULES_1, {});

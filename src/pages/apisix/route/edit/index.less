@@ -12,6 +12,63 @@
 
 .step-form {
   margin-top: var(--td-comp-margin-xxxl);
+
+  :deep(.t-form__label) {
+    width: 160px;
+    white-space: nowrap;
+    text-align: right;
+    margin-right: 24px;
+    box-sizing: border-box;
+  }
+
+  .rewrite-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .radio-group {
+      margin-bottom: 8px;
+      .radio-options {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+    }
+
+    .input-field {
+      width: 480px;
+    }
+
+    .form-item-spacing {
+      margin-top: 8px;
+    }
+  }
+
+  .headers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+
+      .header-input {
+        width: 210px;
+      }
+
+      .remove-button {
+        margin-left: 8px;
+      }
+    }
+
+    .add-header-button {
+      margin-top: 8px;
+      align-self: flex-start;
+    }
+  }
 }
 
 .result-success {
